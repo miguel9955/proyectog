@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Crear Empresa</title>
+    </h:head>
+    <h:body>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="Registro Empresa"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="NitEmpresa:" for="nitEmpresa" />
+                    <p:inputText id="nitEmpresa" value="#{empresaBean.nitEmpresa}" title="NitEmpresa" required="true" requiredMessage="The NitEmpresa field is required."/>
+                     <p:outputLabel value="NombreEmpresa:" for="nombreEmpresa" />
+                    <p:inputText id="nombreEmpresa" value="#{empresaBean.nombreEmpresa}" title="NombreEmpresa" required="true" requiredMessage="The NombreEmpresa field is required."/>
+                    <p:outputLabel value="CiudadEmpresa:" for="ciudadEmpresa" />
+                    <p:inputText id="ciudadEmpresa" value="#{empresaBean.ciudadEmpresa}" title="CiudadEmpresa" required="true" requiredMessage="The CiudadEmpresa field is required."/>
+                    <p:outputLabel value="DireccionEmpresa:" for="direccionEmpresa" />
+                    <p:inputText id="direccionEmpresa" value="#{empresaBean.direccionEmpresa}" title="DireccionEmpresa" required="true" requiredMessage="The DireccionEmpresa field is required."/>
+                    <p:outputLabel value="TelefonoEmpresa:" for="telefonoEmpresa" />
+                    <p:inputText id="telefonoEmpresa" value="#{empresaBean.telefonoEmpresa}" title="TelefonoEmpresa" required="true" requiredMessage="The TelefonoEmpresa field is required."/>
+                    <p:outputLabel value="CorreoEmpresa:" for="correoEmpresa" />
+                    <p:inputText id="correoEmpresa" value="#{empresaBean.correoEmpresa}" title="CorreoEmpresa" required="true" requiredMessage="The CorreoEmpresa field is required."/>
+                    <p:outputLabel value="Contraseña:" for="contraseña" />
+                    <p:password id="contraseña" value="#{empresaBean.contraseña}" title="Contraseña" required="true" requiredMessage="The Contraseña field is required."/>
+                    
+                </p:panelGrid>
+               
+               
+                <h:panelGrid columns="1">
+                 <p:commandButton  icon="ui-icon-plus"  value="Registrarse" action="#{empresaBean.guardar()}" ajax="false"/>
+
+                                 
+                 </h:panelGrid>
+            </h:form>
+
+
+           
+
+        </f:view>
+
+
+    </h:body>
+</html>
+

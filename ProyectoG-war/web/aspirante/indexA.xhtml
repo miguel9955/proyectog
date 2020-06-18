@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <p:menubar>
+                <p:menuitem value="Inicio" outcome="/index"/>
+                 <p:menuitem value="Login" outcome="/Login"/>
+                <p:menuitem value="Aspirantes" outcome="/aspirante/indexA"/>
+                <p:menuitem value="Empresas" outcome="/empresa/indexE"/>
+        <p:menuitem  value="Registro Empresa" outcome="/CrearEmpresa"/>
+
+
+            </p:menubar>
+        <p:dialog widgetVar="valor" modal="true" showEffect="clip" header="Nuevo Registro" resizable="false">
+                     <p:ajax event="close" listener="#{aplicarOfertaBean.limpiar()}" update=":p" />
+
+                            <h:form id="p">
+
+
+                                <p:panelGrid columns="2">
+                                    <p:outputLabel value="DocumentoAspirante:" for="documentoAspirante" />
+
+                                    <p:inputText id="documentoAspirante"  value="#{aplicarOfertaBean.aspirante.documentoAspirante}"/>
+                                    <p:outputLabel value="CodigoOferta:" for="codigoOferta" />
+                                    <p:inputText id="codigoOferta" value="#{aplicarOfertaBean.oferta.codigoOferta}"/>
+                                    <p:commandButton value="Save" actionListener="#{aplicarOfertaBean.guardar()}" oncomplete="PF('valor').hide();"
+                                                     rendered="#{aplicarOfertaBean.aplicar.idAspiranteOferta == null  }"
+                                                     update=":Datos p :msj"/>
+                                </p:panelGrid>
+
+
+                            </h:form>
+                        </p:dialog>
+        <p:growl id="msj" />
+
+        <f:view>
+
+
+            <h:form id="Datos">
+                <h1><h:outputText value="Ofertas"/></h1>
+                <p:dataTable value="#{ofertaBean.listaofertaAspirante}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="CodigoOferta"/>
+                        </f:facet>
+                        <h:outputText value="#{item.codigoOferta}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="TipoOferta"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tipoOferta}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="DescricionOferta"/>
+                        </f:facet>
+                        <h:outputText value="#{item.descricionOferta}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="ExperienciaOferta"/>
+                        </f:facet>
+                        <h:outputText value="#{item.experienciaOferta}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="CantidadAspirantesOferta"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cantidadAspirantesOferta}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="TituloRequerido"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tituloRequerido}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="EstadoOferta"/>
+                        </f:facet>
+                        <h:outputText value="#{item.estadoOferta}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="NitEmpresa"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nitEmpresa.nombreEmpresa}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Inscribirse"/>
+                        </f:facet>
+
+
+                        <p:commandButton value="Aspirar" actionListener="#{aplicarOfertaBean.cargarDatos(item)}" 
+                    update=":p" oncomplete="PF('valor').show();"/>
+
+
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AspiranteEditDlg" widgetVar="AspiranteEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAspiranteTitle}">
+            <h:form id="AspiranteEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{aspiranteController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAspiranteLabel_documentoAspirante}" for="documentoAspirante" />
+                        <p:inputText id="documentoAspirante" value="#{aspiranteController.selected.documentoAspirante}" title="#{bundle.EditAspiranteTitle_documentoAspirante}" required="true" requiredMessage="#{bundle.EditAspiranteRequiredMessage_documentoAspirante}"/>
+                        <p:outputLabel value="#{bundle.EditAspiranteLabel_idAspirante}" for="idAspirante" />
+                        <p:inputText id="idAspirante" value="#{aspiranteController.selected.idAspirante}" title="#{bundle.EditAspiranteTitle_idAspirante}" required="true" requiredMessage="#{bundle.EditAspiranteRequiredMessage_idAspirante}"/>
+                        <p:outputLabel value="#{bundle.EditAspiranteLabel_tipodocumentoAspirante}" for="tipodocumentoAspirante" />
+                        <p:inputText id="tipodocumentoAspirante" value="#{aspiranteController.selected.tipodocumentoAspirante}" title="#{bundle.EditAspiranteTitle_tipodocumentoAspirante}" required="true" requiredMessage="#{bundle.EditAspiranteRequiredMessage_tipodocumentoAspirante}"/>
+                        <p:outputLabel value="#{bundle.EditAspiranteLabel_nombresApitante}" for="nombresApitante" />
+                        <p:inputText id="nombresApitante" value="#{aspiranteController.selected.nombresApitante}" title="#{bundle.EditAspiranteTitle_nombresApitante}" required="true" requiredMessage="#{bundle.EditAspiranteRequiredMessage_nombresApitante}"/>
+                        <p:outputLabel value="#{bundle.EditAspiranteLabel_apellidosAspirante}" for="apellidosAspirante" />
+                        <p:inputText id="apellidosAspirante" value="#{aspiranteController.selected.apellidosAspirante}" title="#{bundle.EditAspiranteTitle_apellidosAspirante}" required="true" requiredMessage="#{bundle.EditAspiranteRequiredMessage_apellidosAspirante}"/>
+                        <p:outputLabel value="#{bundle.EditAspiranteLabel_fechaAspirante}" for="fechaAspirante" />
+                        <p:calendar id="fechaAspirante" pattern="MM/dd/yyyy" value="#{aspiranteController.selected.fechaAspirante}" title="#{bundle.EditAspiranteTitle_fechaAspirante}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditAspiranteLabel_carreraAspirante}" for="carreraAspirante" />
+                        <p:inputText id="carreraAspirante" value="#{aspiranteController.selected.carreraAspirante}" title="#{bundle.EditAspiranteTitle_carreraAspirante}" required="true" requiredMessage="#{bundle.EditAspiranteRequiredMessage_carreraAspirante}"/>
+                        <p:outputLabel value="#{bundle.EditAspiranteLabel_semestreAspirante}" for="semestreAspirante" />
+                        <p:inputText id="semestreAspirante" value="#{aspiranteController.selected.semestreAspirante}" title="#{bundle.EditAspiranteTitle_semestreAspirante}" required="true" requiredMessage="#{bundle.EditAspiranteRequiredMessage_semestreAspirante}"/>
+                        <p:outputLabel value="#{bundle.EditAspiranteLabel_telefonoAspirante}" for="telefonoAspirante" />
+                        <p:inputText id="telefonoAspirante" value="#{aspiranteController.selected.telefonoAspirante}" title="#{bundle.EditAspiranteTitle_telefonoAspirante}" required="true" requiredMessage="#{bundle.EditAspiranteRequiredMessage_telefonoAspirante}"/>
+                        <p:outputLabel value="#{bundle.EditAspiranteLabel_correoAspirante}" for="correoAspirante" />
+                        <p:inputText id="correoAspirante" value="#{aspiranteController.selected.correoAspirante}" title="#{bundle.EditAspiranteTitle_correoAspirante}" required="true" requiredMessage="#{bundle.EditAspiranteRequiredMessage_correoAspirante}"/>
+                        <p:outputLabel value="#{bundle.EditAspiranteLabel_hojadevidaAspirante}" for="hojadevidaAspirante" />
+                        <p:inputText id="hojadevidaAspirante" value="#{aspiranteController.selected.hojadevidaAspirante}" title="#{bundle.EditAspiranteTitle_hojadevidaAspirante}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{aspiranteController.update}" value="#{bundle.Save}" update="display,:AspiranteListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AspiranteEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AspiranteEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AspiranteViewDlg" widgetVar="AspiranteViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAspiranteTitle}">
+            <h:form id="AspiranteViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{aspiranteController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAspiranteLabel_documentoAspirante}"/>
+                        <h:outputText value="#{aspiranteController.selected.documentoAspirante}" title="#{bundle.ViewAspiranteTitle_documentoAspirante}"/>
+                        <h:outputText value="#{bundle.ViewAspiranteLabel_idAspirante}"/>
+                        <h:outputText value="#{aspiranteController.selected.idAspirante}" title="#{bundle.ViewAspiranteTitle_idAspirante}"/>
+                        <h:outputText value="#{bundle.ViewAspiranteLabel_tipodocumentoAspirante}"/>
+                        <h:outputText value="#{aspiranteController.selected.tipodocumentoAspirante}" title="#{bundle.ViewAspiranteTitle_tipodocumentoAspirante}"/>
+                        <h:outputText value="#{bundle.ViewAspiranteLabel_nombresApitante}"/>
+                        <h:outputText value="#{aspiranteController.selected.nombresApitante}" title="#{bundle.ViewAspiranteTitle_nombresApitante}"/>
+                        <h:outputText value="#{bundle.ViewAspiranteLabel_apellidosAspirante}"/>
+                        <h:outputText value="#{aspiranteController.selected.apellidosAspirante}" title="#{bundle.ViewAspiranteTitle_apellidosAspirante}"/>
+                        <h:outputText value="#{bundle.ViewAspiranteLabel_fechaAspirante}"/>
+                        <h:outputText value="#{aspiranteController.selected.fechaAspirante}" title="#{bundle.ViewAspiranteTitle_fechaAspirante}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAspiranteLabel_carreraAspirante}"/>
+                        <h:outputText value="#{aspiranteController.selected.carreraAspirante}" title="#{bundle.ViewAspiranteTitle_carreraAspirante}"/>
+                        <h:outputText value="#{bundle.ViewAspiranteLabel_semestreAspirante}"/>
+                        <h:outputText value="#{aspiranteController.selected.semestreAspirante}" title="#{bundle.ViewAspiranteTitle_semestreAspirante}"/>
+                        <h:outputText value="#{bundle.ViewAspiranteLabel_telefonoAspirante}"/>
+                        <h:outputText value="#{aspiranteController.selected.telefonoAspirante}" title="#{bundle.ViewAspiranteTitle_telefonoAspirante}"/>
+                        <h:outputText value="#{bundle.ViewAspiranteLabel_correoAspirante}"/>
+                        <h:outputText value="#{aspiranteController.selected.correoAspirante}" title="#{bundle.ViewAspiranteTitle_correoAspirante}"/>
+                        <h:outputText value="#{bundle.ViewAspiranteLabel_hojadevidaAspirante}"/>
+                        <h:outputText value="#{aspiranteController.selected.hojadevidaAspirante}" title="#{bundle.ViewAspiranteTitle_hojadevidaAspirante}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AspiranteViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

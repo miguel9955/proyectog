@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title></title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+       
+        <br />
+        <p:menubar>
+                <p:menuitem value="Inicio" outcome="index"/>
+                 <p:menuitem value="Login" outcome="Login"/>
+                <p:menuitem value="Aspirantes" outcome="/aspirante/indexA"/>
+                <p:menuitem value="Empresas" outcome="/empresa/indexE"/>
+        <p:menuitem  value="Registro Empresa" outcome="/CrearEmpresa"/>
+
+
+            </p:menubar>
+        <p:link outcome="/aspirante/indexA" value="Aspirantes"/>
+        <p:link outcome="/empresa/indexE" value="Empresa"/>
+
+       <p:dialog id="AspiranteCreateDlg" widgetVar="AspiranteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAspiranteTitle}">
+      <h:form id="AspiranteCreateForm" enctype="multipart/form-data">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{aspiranteController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAspiranteLabel_documentoAspirante}" for="documentoAspirante" />
+                        <p:inputText id="documentoAspirante" value="#{aspiranteController.selected.documentoAspirante}" title="#{bundle.CreateAspiranteTitle_documentoAspirante}" required="true" requiredMessage="#{bundle.CreateAspiranteRequiredMessage_documentoAspirante}"/>
+                        <p:outputLabel value="#{bundle.CreateAspiranteLabel_idAspirante}" for="idAspirante" />
+                        <p:inputText id="idAspirante" value="#{aspiranteController.selected.idAspirante}" title="#{bundle.CreateAspiranteTitle_idAspirante}" required="true" requiredMessage="#{bundle.CreateAspiranteRequiredMessage_idAspirante}"/>
+                        <p:outputLabel value="#{bundle.CreateAspiranteLabel_tipodocumentoAspirante}" for="tipodocumentoAspirante" />
+                        <p:inputText id="tipodocumentoAspirante" value="#{aspiranteController.selected.tipodocumentoAspirante}" title="#{bundle.CreateAspiranteTitle_tipodocumentoAspirante}" required="true" requiredMessage="#{bundle.CreateAspiranteRequiredMessage_tipodocumentoAspirante}"/>
+                        <p:outputLabel value="#{bundle.CreateAspiranteLabel_nombresApitante}" for="nombresApitante" />
+                        <p:inputText id="nombresApitante" value="#{aspiranteController.selected.nombresApitante}" title="#{bundle.CreateAspiranteTitle_nombresApitante}" required="true" requiredMessage="#{bundle.CreateAspiranteRequiredMessage_nombresApitante}"/>
+                        <p:outputLabel value="#{bundle.CreateAspiranteLabel_apellidosAspirante}" for="apellidosAspirante" />
+                        <p:inputText id="apellidosAspirante" value="#{aspiranteController.selected.apellidosAspirante}" title="#{bundle.CreateAspiranteTitle_apellidosAspirante}" required="true" requiredMessage="#{bundle.CreateAspiranteRequiredMessage_apellidosAspirante}"/>
+                        <p:outputLabel value="#{bundle.CreateAspiranteLabel_fechaAspirante}" for="fechaAspirante" />
+                        <p:calendar id="fechaAspirante" pattern="MM/dd/yyyy" value="#{aspiranteController.selected.fechaAspirante}" title="#{bundle.EditAspiranteTitle_fechaAspirante}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAspiranteLabel_carreraAspirante}" for="carreraAspirante" />
+                        <p:inputText id="carreraAspirante" value="#{aspiranteController.selected.carreraAspirante}" title="#{bundle.CreateAspiranteTitle_carreraAspirante}" required="true" requiredMessage="#{bundle.CreateAspiranteRequiredMessage_carreraAspirante}"/>
+                        <p:outputLabel value="#{bundle.CreateAspiranteLabel_semestreAspirante}" for="semestreAspirante" />
+                        <p:inputText id="semestreAspirante" value="#{aspiranteController.selected.semestreAspirante}" title="#{bundle.CreateAspiranteTitle_semestreAspirante}" required="true" requiredMessage="#{bundle.CreateAspiranteRequiredMessage_semestreAspirante}"/>
+                        <p:outputLabel value="#{bundle.CreateAspiranteLabel_telefonoAspirante}" for="telefonoAspirante" />
+                        <p:inputText id="telefonoAspirante" value="#{aspiranteController.selected.telefonoAspirante}" title="#{bundle.CreateAspiranteTitle_telefonoAspirante}" required="true" requiredMessage="#{bundle.CreateAspiranteRequiredMessage_telefonoAspirante}"/>
+                        <p:outputLabel value="#{bundle.CreateAspiranteLabel_correoAspirante}" for="correoAspirante" />
+                        <p:inputText id="correoAspirante" value="#{aspiranteController.selected.correoAspirante}" title="#{bundle.CreateAspiranteTitle_correoAspirante}" required="true" requiredMessage="#{bundle.CreateAspiranteRequiredMessage_correoAspirante}"/>
+                        <p:outputLabel value="#{bundle.CreateAspiranteLabel_hojadevidaAspirante}" for="hojadevidaAspirante" />
+                        <p:inputText id="hojadevidaAspirante" value="#{aspiranteController.selected.hojadevidaAspirante}" />
+                        <p:outputLabel value="Hoja"/>
+                        <p:fileUpload
+                            value="#{aspiranteController.file}" mode="simple"
+                            />
+                   <p:outputLabel value="Contraseña:" for="contraseña" />
+                   <p:password id="contraseña" value="#{aspiranteController.contraseña}" title="Contraseña" required="true" requiredMessage="The Contraseña field is required."/>
+                  
+                    </p:panelGrid>
+                    
+                <h:panelGrid columns="1">
+                   
+                    <p:commandButton value="Submit" action="#{aspiranteController.nuevoD()}" 
+                                         ajax="false" update="display, :DocumentosListFomr:datalist, :growl"/>
+                                           
+                </h:panelGrid>                    <p:commandButton value="#{bundle.Cancel}" onclick="AspiranteCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+               </p:dialog>
+
+             <p:commandButton id="createButton" icon="ui-icon-plus"   value="Resgistrar Aspirante" actionListener="#{aspiranteController.prepareCreate}" update=":AspiranteCreateForm" oncomplete="PF('AspiranteCreateDialog').show()"/>
+             <f:view>
+
+
+                 <h:form>
+                     <h1><h:outputText value="List"/></h1>
+                     <p:dataTable value="#{ofertaBean.listaoferta}" var="item">
+                         <p:column>
+                             <f:facet name="header">
+                                 <h:outputText value="CodigoOferta"/>
+                             </f:facet>
+                             <h:outputText value="#{item.codigoOferta}"/>
+                         </p:column>
+                         <p:column>
+                             <f:facet name="header">
+                                 <h:outputText value="TipoOferta"/>
+                             </f:facet>
+                             <h:outputText value="#{item.tipoOferta}"/>
+                         </p:column>
+                         <p:column>
+                             <f:facet name="header">
+                                 <h:outputText value="DescricionOferta"/>
+                             </f:facet>
+                             <h:outputText value="#{item.descricionOferta}"/>
+                         </p:column>
+                         <p:column>
+                             <f:facet name="header">
+                                 <h:outputText value="ExperienciaOferta"/>
+                             </f:facet>
+                             <h:outputText value="#{item.experienciaOferta}"/>
+                         </p:column>
+                         <p:column>
+                             <f:facet name="header">
+                                 <h:outputText value="CantidadAspirantesOferta"/>
+                             </f:facet>
+                             <h:outputText value="#{item.cantidadAspirantesOferta}"/>
+                         </p:column>
+                         <p:column>
+                             <f:facet name="header">
+                                 <h:outputText value="TituloRequerido"/>
+                             </f:facet>
+                             <h:outputText value="#{item.tituloRequerido}"/>
+                         </p:column>
+                         <p:column>
+                             <f:facet name="header">
+                                 <h:outputText value="EstadoOferta"/>
+                             </f:facet>
+                             <h:outputText value="#{item.estadoOferta}"/>
+                         </p:column>
+                         <p:column>
+                             <f:facet name="header">
+                                 <h:outputText value="NitEmpresa"/>
+                             </f:facet>
+                             <h:outputText value="#{item.nitEmpresa.nombreEmpresa}"/>
+                         </p:column>
+                     </p:dataTable>
+                 </h:form>
+             </f:view>
+
+    </h:body>
+
+</html>
+

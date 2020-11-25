@@ -8,7 +8,7 @@ package uts.edu.dae.controlador;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import uts.edu.dae.ejb.UsuarioFacade;
 import uts.edu.dae.entidades.Usuario;
@@ -18,7 +18,8 @@ import uts.edu.dae.entidades.Usuario;
  * @author Asus
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
+
 public class LoginBean {
 
     @EJB
@@ -73,13 +74,21 @@ public String autenticar(){
                if (usarios.getContraseña().equals(contraseña) ) {
                 return "aspirante";
            }
+           }else if (usarios.getTipoUsuario().equals("ADMIN")){
+               if (usarios.getContraseña().equals(contraseña) ) {
+                return "admin";
            }
-           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"El Contraseña no existe","El Contraseña no existe"));
+           }
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"Contraseña incorrecta","Contraseña incorrecta"));
                   return null;
        }
        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"El usuario no existe","El usuario no existe"));
        return null;
    }
+    public void cerrarSesion(){
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+       
+} 
     public LoginBean() {
     }
     

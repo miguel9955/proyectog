@@ -4,19 +4,52 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+         <title>Login</title>
+    <link rel="ICON" type="iMAGEN/PNG" href="img/avatar-aspirante.svg" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+
     </h:head>
     <h:body>
-        <h:form>
-            <p:growl id="grow" life="3000" />
-            <h:panelGrid columns="2" id="hpglogin">
-                <p:outputLabel value="Usuario"/>
-                <p:inputText required="true" value="#{loginBean.correoUsuario}"/>
-                <p:outputLabel value="Contraseña"/>
-                <p:inputText required="true" type="password" value="#{loginBean.contraseña}"/>
-                <p:commandButton value="ingresar" update="hpglogin,grow" action="#{loginBean.autenticar()}"/>
-            </h:panelGrid>
-        </h:form>
+        
+        <div class="encabesado">
+        <img class="img-titulo" src="img/uts.png" />
+        <h1 class="title2">Unidades Tecnologicas de Santander </h1>
+
+    </div>
+    <img class="wave" src="img/wave.png" />
+
+    <div class="container">
+        <div class="img">
+            <img src="img/imagen.svg" />
+        </div>
+        <div class="login-content">
+            <div>
+                <img src="img/avatar.svg" />
+                <h2 class="title">Bienvenidos</h2>
+                <center>
+                    <h:form>
+                        <p:growl id="grow" life="3000" />
+                        <h:panelGrid columns="2" id="hpglogin">
+                            <center>
+                                <p:outputLabel value="Usuario" /> <br/>
+                                <p:inputText required="true" value="#{loginBean.correoUsuario}" /><br/>
+                                <p:outputLabel value="Contraseña" /><br/>
+                                <p:inputText required="true" type="password" value="#{loginBean.contraseña}" />
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <p:commandButton value="ingresar" update="hpglogin,grow" action="#{loginBean.autenticar()}" />
+
+                            </center>
+                        </h:panelGrid>
+                    </h:form>
+                </center>
+            </div>
+        </div>
+    </div>
     </h:body>
+    
 </html>
 

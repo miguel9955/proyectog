@@ -212,6 +212,7 @@ public class AspiranteController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+    //Crear Usuario ajax
     public void createU(){
            this.usuario.setCorreoUsuario(this.selected.getCorreoAspirante());
            this.usuario.setContraseña(contraseña);
@@ -225,6 +226,7 @@ public class AspiranteController implements Serializable {
         }
     
     }
+    //Creacion Ruta del aspirante
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("AspiranteCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -243,7 +245,7 @@ public class AspiranteController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-
+//Lista Aspirantes
     public List<Aspirante> getItems() {
         if (items == null) {
             items = getFacade().findAll();
@@ -327,6 +329,7 @@ public class AspiranteController implements Serializable {
         }
 
     }
+    //Creacion de documento y ruta
     public void nuevoD(){
         if (upload()) {
            selected.setHojadevidaAspirante(Constantes.SEPARADOR +destination);
@@ -338,6 +341,7 @@ public class AspiranteController implements Serializable {
            destination="";
         }
     }
+    //Subida ruta y copia
     public Boolean upload(){
         try {
             destination = Constantes.URL + selected.getIdAspirante();

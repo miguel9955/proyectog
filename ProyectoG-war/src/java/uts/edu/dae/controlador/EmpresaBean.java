@@ -6,9 +6,12 @@
 package uts.edu.dae.controlador;
 
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import uts.edu.dae.ejb.EmpresaFacade;
 import uts.edu.dae.ejb.UsuarioFacade;
 import uts.edu.dae.entidades.Empresa;
@@ -32,12 +35,22 @@ public class EmpresaBean {
     private String direccionEmpresa;
     private String telefonoEmpresa;
     private String correoEmpresa;
+    private String msj; 
+
     @EJB
     private UsuarioFacade usuarioFacade;
     private Usuario usario;
     private String correoUsuario;
     private String tipoUsuario;
     private String contraseña;
+
+    public String getMsj() {
+        return msj;
+    }
+
+    public void setMsj(String msj) {
+        this.msj = msj;
+    }
 
     public Integer getNitEmpresa() {
         return nitEmpresa;
@@ -135,7 +148,12 @@ public class EmpresaBean {
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
-
+public void cargarDatosO(Empresa me) {
+        this.empresa = me;
+    }
+ public void limpiar() {
+        this.empresa = new Empresa();
+    }
     public String guardar() {
 
         Usuario c = new Usuario();
@@ -158,7 +176,35 @@ public class EmpresaBean {
         return "Login";
 
     }
-
+    public void eliminar(Empresa meli) {
+        try {
+            this.empresaFacade.remove(meli);
+            this.msj = "Registro Eliminado Correctamente";
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.msj = "Error " + e.getMessage();
+        }
+        FacesMessage mensaje = new FacesMessage(this.msj);
+        FacesContext.getCurrentInstance().addMessage(null, mensaje);
+    }
+public void actualizar() {
+        try {
+            this.empresaFacade.edit(empresa);
+            this.msj = "Registro Actualizado Correctamente";
+            this.empresa = new Empresa();
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.msj = "Error " + e.getMessage();
+        }
+        FacesMessage mensaje = new FacesMessage(this.msj);
+        FacesContext.getCurrentInstance().addMessage(null, mensaje);
+    }
+@PostConstruct
+    public void init() {
+      empresa = new Empresa();
+        
+        
+    }
     public EmpresaBean() {
 
     }

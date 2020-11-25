@@ -5,18 +5,15 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Inicio</title>
+         <link href="../componentes/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="ICON" type="iMAGEN/PNG" href="../img/avatar.svg"/>
+    <!-- Custom styles for this template-->
+    <link href="../css/estilos.css" rel="stylesheet"/>
+
     </h:head>
     <h:body>
-        <p:menubar>
-                <p:menuitem value="Inicio" outcome="/index"/>
-                 <p:menuitem value="Login" outcome="/Login"/>
-                <p:menuitem value="Aspirantes" outcome="/aspirante/indexA"/>
-                <p:menuitem value="Empresas" outcome="/empresa/indexE"/>
-        <p:menuitem  value="Registro Empresa" outcome="/CrearEmpresa"/>
-
-
-            </p:menubar>
+       
         <p:dialog widgetVar="valor" modal="true" showEffect="clip" header="Nuevo Registro" resizable="false">
                      <p:ajax event="close" listener="#{aplicarOfertaBean.limpiar()}" update=":p" />
 
@@ -42,7 +39,107 @@
         <f:view>
 
 
-            <h:form id="Datos">
+            
+        </f:view>
+<div id="wrapper">
+
+        <!-- menu lateral-->
+        <ul class="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- icono y titulo menu -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Aspirantes</div>
+            </a>
+
+            <!-- Divisor -->
+            <hr class="sidebar-divider my-0"/>
+
+            <!-- subtitulo menu-->
+            <li class="nav-item active">
+                <a class="nav-link"  href="#">
+                    <i class="fa fa-address-card" aria-hidden="true"></i>
+                    <span>Inicio</span></a>
+            </li>
+
+            <!-- Divisor-->
+
+            <!-- Heading -->
+            
+
+            <!-- desplegable de menu-->
+            
+
+            <!-- Divisor-->
+            <hr class="sidebar-divider d-none d-md-block"/>
+
+            <!-- boton despliegue menu -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!--fin del menu lateral-->
+        <!-- Contenedor principal -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- contenedor secundario -->
+            <div id="content">
+
+                <!-- barra superior -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                       <i class="fa fa-bars"></i>
+                    </button>
+                    <img src="../img/uts.png" width="80" height="70" class="imagen-menu"/>
+                    <h2 class="h2-menu">Unidades Tecnologicas de Santander</h2>
+
+
+                    <!-- cuadro usuario -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- divisor -->
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <!-- fin divisor -->
+
+                        <!-- usuario informacion -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">#{loginBean.correoUsuario}</span>
+                                <img class="img-profile rounded-circle" src="../img/avatar-aspirante.svg"/>
+                            </a>
+                            <!-- desplegable usuario -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+
+                             <p:button class="dropdown-item"  value="Cerrar Sesión" outcome="/index"/> 
+
+                            </div>
+                            <!-- fin desplegable usuario -->
+                        </li>
+                        <!-- fin usuario informacion -->
+                    </ul>
+                    <!-- fin cuadro usuario -->
+                </nav>
+                <!-- fin barra superior -->
+                <!-- Contenedor interno-->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Aspirantes</h1>
+
+                    </div>
+
+                    <!-- fin seccion cuadros -->
+                    <!-- tabla -->
+                    <div class="card mb-4">
+                        <div class="card-header"><i class="fas fa-table mr-1"></i>Tabla de ofertas</div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <h:form id="Datos">
                 <h1><h:outputText value="Ofertas"/></h1>
                 <p:dataTable value="#{ofertaBean.listaofertaAspirante}" var="item">
                     <p:column>
@@ -106,8 +203,36 @@
                     </p:column>
                 </p:dataTable>
             </h:form>
-        </f:view>
 
+                            </div>
+                        </div>
+                    </div>
+                    <!-- fin tabla -->
+
+                </div>
+                <!-- /.contenedor interno -->
+
+            </div>
+            <!-- fin Contenedor secundario -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white ">
+                <div class="container my-auto ">
+                    <div class="copyright text-center my-auto ">
+                        <span>Copyright &copy; Miguel Leonardo Cordoba-- Johan Arley Ortiz---2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- fin Footer -->
+
+        </div>
+        <!-- fin contenedor principal -->
+
+    </div>
+    <!-- fin  Wrapper -->
+    <!--componentes necesarios-->
+    <script src="../componentes/bootstrap/js/bootstrap.bundle.min.js "></script>
+    <script src="../js/desplegar.js"></script>
+    <!-- fin de componentes -->
     </h:body>
 </html>
 

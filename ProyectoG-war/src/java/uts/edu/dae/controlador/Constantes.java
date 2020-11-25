@@ -9,6 +9,7 @@ package uts.edu.dae.controlador;
  *
  * @author Asus
  */
+//Constantes para la ruta del documento
 public class Constantes {
     public static final String URL ="resources/docs/";
     public static final String SEPARADOR ="/";

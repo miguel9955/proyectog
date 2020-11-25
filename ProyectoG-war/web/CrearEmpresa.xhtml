@@ -10,7 +10,7 @@
     <h:body>
         <f:view>
 
-
+            <center>
             <h:form>
                 <h1><h:outputText value="Registro Empresa"/></h1>
                 <p:panelGrid columns="2">
@@ -32,14 +32,14 @@
                 </p:panelGrid>
                
                
-                <h:panelGrid columns="1">
+                <h:panelGrid columns="2">
                  <p:commandButton  icon="ui-icon-plus"  value="Registrarse" action="#{empresaBean.guardar()}" ajax="false"/>
-
+                 <p:button value="volver" outcome="/index"></p:button>
                                  
                  </h:panelGrid>
             </h:form>
 
-
+</center>
            
 
         </f:view>

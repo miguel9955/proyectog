@@ -5,27 +5,20 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+                <title>Empresa</title>
+
+        <link href="../componentes/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="ICON" type="iMAGEN/PNG" href="../img/icono-empresa.svg"/>
+        <!-- Custom styles for this template-->
+        <link href="../css/estilos.css" rel="stylesheet"/>   
+
+
     </h:head>
     <h:body>
 
-        <p:menubar>
-            <p:menuitem value="Inicio" outcome="/index"/>
-            <p:menuitem value="Login" outcome="/Login"/>
-            <p:menuitem value="Aspirantes" outcome="/aspirante/indexA"/>
-            <p:menuitem value="Empresas" outcome="/empresa/indexE"/>
-            <p:menuitem  value="Registro Empresa" outcome="/CrearEmpresa"/>
-
-
-        </p:menubar>
+       
         <p:growl id="msj" />
-        <h:form id="nuevo">
-            <p:fieldset legend="Nuevo" toggleable="true">
-                <p:panelGrid columns="1">
-                    <p:commandButton icon="fa fa-fw fa-plus" value="Nuevo" oncomplete="PF('valor').show();"/>
-                </p:panelGrid>
-            </p:fieldset>
-        </h:form>
+
         <p:dialog widgetVar="valor" modal="true" showEffect="clip" header="Nuevo Registro" resizable="false">
             <p:ajax event="close" listener="#{ofertaBean.limpiar()}" update=":p" />
             <h:form id="p">
@@ -33,7 +26,7 @@
                     <p:outputLabel value="TipoOferta:" for="tipoOferta" />
                     <p:inputText id="tipoOferta" value="#{ofertaBean.oferta.tipoOferta}" title="TipoOferta" required="true" requiredMessage="The TipoOferta field is required."/>
                     <p:outputLabel value="DescricionOferta:" for="descricionOferta" />
-                    <p:inputText id="descricionOferta" value="#{ofertaBean.oferta.descricionOferta}" title="DescricionOferta" required="true" requiredMessage="The DescricionOferta field is required."/>
+                    <p:inputTextarea rows="5" cols="30"  id="descricionOferta" value="#{ofertaBean.oferta.descricionOferta}" title="DescricionOferta" required="true" requiredMessage="The DescricionOferta field is required."/>
                     <p:outputLabel value="ExperienciaOferta:" for="experienciaOferta" />
                     <p:inputText id="experienciaOferta" value="#{ofertaBean.oferta.experienciaOferta}" title="ExperienciaOferta" />
                     <p:outputLabel value="CantidadAspirantesOferta:" for="cantidadAspirantesOferta" />
@@ -47,81 +40,304 @@
 
                     <p:selectOneMenu  id="nitEmpresa" value="#{ofertaBean.empresa.nitEmpresa}" required="true" requiredMessage="The NitEmpresa field is required.">
                         <f:selectItems value="#{empresaBean.listaempresa}" var="ma" 
-                                       itemValue="#{ma.nitEmpresa}" itemLabel="#{ma.nombreEmpresa} #{ma.nitEmpresa}"  />
+                                       itemValue="#{ma.nitEmpresa}" itemLabel="#{ma.nombreEmpresa} "  />
                     </p:selectOneMenu>
                     <p:commandButton value="Crear Ofertas" actionListener="#{ofertaBean.guardar1()}" oncomplete="PF('valor').hide();"
                                      rendered="#{ofertaBean.codigoOferta == null}"
+                                     update=":Datos p :msj"/>
+                    <p:commandButton value="Update" actionListener="#{ofertaBean.actualizar()}" oncomplete="PF('valor').hide();"
+                                     rendered="#{ofertaBean.codigoOferta != null}"
                                      update=":Datos p :msj"/>
 
                 </p:panelGrid>
 
             </h:form>
         </p:dialog>
+
         <f:view>
 
 
-            <h:form id="Datos">
-                <h1><h:outputText value="List"/></h1>
-                <p:dataTable value="#{ofertaBean.listaofertaEmpresa}" var="item">
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="CodigoOferta"/>
-                        </f:facet>
-                        <h:outputText value="#{item.codigoOferta}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="TipoOferta"/>
-                        </f:facet>
-                        <h:outputText value="#{item.tipoOferta}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="DescricionOferta"/>
-                        </f:facet>
-                        <h:outputText value="#{item.descricionOferta}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="ExperienciaOferta"/>
-                        </f:facet>
-                        <h:outputText value="#{item.experienciaOferta}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="CantidadAspirantesOferta"/>
-                        </f:facet>
-                        <h:outputText value="#{item.cantidadAspirantesOferta}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="TituloRequerido"/>
-                        </f:facet>
-                        <h:outputText value="#{item.tituloRequerido}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="EstadoOferta"/>
-                        </f:facet>
-                        <h:outputText value="#{item.estadoOferta}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="NitEmpresa"/>
-                        </f:facet>
-                        <h:outputText value="#{item.nitEmpresa.nombreEmpresa}"/>
-                    </p:column>
-                    <p:column>
-                          <f:facet name="header">
-                            <h:outputText value="Ver"/>
-                          </f:facet>
-                        <p:commandButton value="Ver" action="#{aplicarOfertaBean.a(item.codigoOferta)}" 
-                    />
-                    </p:column>
-                </p:dataTable>
-            </h:form>
-        </f:view>
 
+        </f:view>
+        <div id="wrapper">
+
+            <!-- menu lateral-->
+            <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+
+                <!-- icono y titulo menu -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <i class="fa fa-briefcase" aria-hidden="true"></i>
+                    </div>
+                    <div class="sidebar-brand-text mx-3">Empresas</div>
+                </a>
+
+                <!-- Divisor -->
+                <hr class="sidebar-divider my-0"/>
+
+                <!-- subtitulo menu-->
+                <li class="nav-item active">
+                    <p:link class="nav-link" outcome="/empresa/indexE">
+                        <i class="fa fa-address-card" aria-hidden="true"></i>
+                        <span>Inicio</span>
+                    </p:link>
+                </li>
+
+                <!-- Divisor-->
+
+                <!-- Heading -->
+                
+
+                <!-- desplegable de menu-->
+                
+
+                <!-- Divisor-->
+                <hr class="sidebar-divider d-none d-md-block"/>
+
+                <!-- boton despliegue menu -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
+
+            </ul>
+            <!--fin del menu lateral-->
+            <!-- Contenedor principal -->
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <!-- contenedor secundario -->
+                <div id="content">
+
+                    <!-- barra superior -->
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                        <!-- Sidebar Toggle (Topbar) -->
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <img src="../img/uts.png" width="80" height="70" class="imagen-menu"/>
+                        <h2 class="h2-menu">Unidades Tecnologicas de Santander</h2>
+
+
+                        <!-- cuadro usuario -->
+                        <ul class="navbar-nav ml-auto">
+
+                            <!-- divisor -->
+                            <div class="topbar-divider d-none d-sm-block"></div>
+                            <!-- fin divisor -->
+
+                            <!-- usuario informacion -->
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">#{loginBean.correoUsuario}</span>
+                                    <img class="img-profile rounded-circle" src="../img/avatar-empresa.svg"/>
+                                </a>
+                                <!-- desplegable usuario -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+
+                                    <p:button class="dropdown-item"  value="Cerrar Sesión" outcome="/index"/> 
+
+                                </div>
+                                <!-- fin desplegable usuario -->
+                            </li>
+                            <!-- fin usuario informacion -->
+                        </ul>
+                        <!-- fin cuadro usuario -->
+                    </nav>
+                    <!-- fin barra superior -->
+                    <!-- Contenedor interno-->
+                    <div class="container-fluid">
+
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">Empresas</h1>
+                            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generar pdf</a>
+                        </div>
+
+                        <!-- seccion cuadros-->
+                        <div class="row">
+
+
+
+                            <!-- cuadro -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Crear oferta</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <h:form id="nuevo">
+
+                                                        <p:panelGrid columns="1">
+                                                            <p:commandButton icon="fa fa-fw fa-plus" value="Nuevo" oncomplete="PF('valor').show();"/>
+                                                        </p:panelGrid>
+
+                                                    </h:form>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+
+                                                <i class="fa fa-plus-circle  fa-2x text-gray-300 " aria-hidden="true "></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- fin cuadro -->
+                        </div>
+                        <!-- fin seccion cuadros -->
+                        <!-- tabla -->
+                        <div class="card mb-4">
+                            <div class="card-header"><i class="fa fa-table" aria-hidden="true"></i> Tabla de ofertas</div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <h:form id="Datos">
+                                        <h1><h:outputText value="Lista"/></h1>
+                                        <p:dataTable value="#{ofertaBean.listaofertaEmpresa}" var="item">
+                                            <p:column >
+                                                <f:facet name="header">
+                                                    <h:outputText value="CodigoOferta"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.codigoOferta}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="TipoOferta"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.tipoOferta}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="DescricionOferta"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.descricionOferta}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="ExperienciaOferta"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.experienciaOferta}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="CantidadAspirantesOferta"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.cantidadAspirantesOferta}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="TituloRequerido"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.tituloRequerido}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="EstadoOferta"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.estadoOferta}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="NitEmpresa"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.nitEmpresa.nombreEmpresa}"/>
+                                            </p:column>
+                                            <p:column headerText="Actualizar" exportable="false">
+                                                <p:commandButton icon="fa fa-pencil" value="Act" actionListener="#{ofertaBean.cargarDatosO(item)}" 
+                                                                 update=":p" oncomplete="PF('valor').show();"/>
+                                            </p:column>
+                                            <p:column headerText="Eliminar" exportable="false">
+                                                <p:commandButton icon="fa fa-trash" value=" |" actionListener="#{ofertaBean.eliminar(item)}" 
+                                                                 update=":Datos :msj"/>
+                                            </p:column>
+
+
+                                        </p:dataTable>
+                                    </h:form>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- fin tabla -->
+                        <div class="card mb-4">
+                            <div class="card-header"><i class="fa fa-table" aria-hidden="true"></i> Tabla de Aspirantes</div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <f:view>
+
+
+                                        <h:form>
+                                            <h1><h:outputText value="Lista aspirantes"/></h1>
+                                            <p:dataTable value="#{ofertaBean.listaAE}" var="item">
+                                                <p:column filterBy="#{item[0].codigoOferta}">
+                                                    <f:facet name="header">
+                                                        <h:outputText value="CodigoOferta"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item[0].codigoOferta}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Nombre Aspirante"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item[1]}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Apellido Aspirante"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item[2]}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Hoja De Vida"/>
+                                                    </f:facet>
+                                                    <center>
+                                                        <a href="#{facesContext.externalContext.requestContextPath}#{item[3]}" target="_blank">
+                                                            Ver
+                                                        </a>
+                                                    </center>
+                                                </p:column>
+
+
+
+                                            </p:dataTable>
+                                        </h:form>
+                                    </f:view>
+
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.contenedor interno -->
+
+                </div>
+                <!-- fin Contenedor secundario -->
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white ">
+                    <div class="container my-auto ">
+                        <div class="copyright text-center my-auto ">
+                            <span>Copyright &copy; Miguel Leonardo Cordoba-- Johan Arley Ortiz---2020</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- fin Footer -->
+
+            </div>
+            <!-- fin contenedor principal -->
+
+        </div>
+        <!-- fin  Wrapper -->
+        <!--componentes necesarios-->
+        <script src="../componentes/bootstrap/js/bootstrap.bundle.min.js "></script>
+        <script src="../js/desplegar.js"></script>
+
+        <!-- fin de componentes -->
     </h:body>
+
 </html>
 

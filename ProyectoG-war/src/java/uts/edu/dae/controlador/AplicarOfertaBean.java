@@ -32,12 +32,13 @@ public class AplicarOfertaBean {
     private Aspirante aspirante;
     private String msj;
     private List <AspiranteOfertaAplicar> ver;
+    //Prueba Falata Comprobar
     public String a(int ID){
     ver = aspiranteOfertaAplicarFacade.ListaVer(ID);
     return "/empresa/ver";
     }
     public List<AspiranteOfertaAplicar> getVer( ) {
-        ver = aspiranteOfertaAplicarFacade.findAll();
+       
         return ver;
     }
 
@@ -77,12 +78,14 @@ public class AplicarOfertaBean {
     public void setMsj(String msj) {
         this.msj = msj;
     }
+    //Post para el init del ajax
     @PostConstruct
     public void init() {
         this.aplicar = new AspiranteOfertaAplicar();
         this.aspirante = new Aspirante();
         this.oferta = new Oferta();
     }
+    //Crear Oferta
     public void guardar() {
         try {
             this.aplicar.setDocumentoAspirante(aspirante);

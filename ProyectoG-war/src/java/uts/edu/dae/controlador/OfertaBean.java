@@ -10,9 +10,12 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import uts.edu.dae.ejb.AspiranteFacade;
 import uts.edu.dae.ejb.OfertaFacade;
+import uts.edu.dae.entidades.Aspirante;
 import uts.edu.dae.entidades.Empresa;
 import uts.edu.dae.entidades.Oferta;
 
@@ -24,21 +27,48 @@ import uts.edu.dae.entidades.Oferta;
 @RequestScoped
 public class OfertaBean {
     @EJB
+    private AspiranteFacade aspiranteFacade;
+    private Aspirante aspirante;
+    @EJB
     private OfertaFacade ofertaFacade;
     private Oferta oferta;
     private List <Oferta> Listaoferta;
     private List <Oferta> ListaofertaEmpresa;
     private List <Oferta> ListaofertaAspirante;
+    private List <Oferta> ListaAE;
     private String msj;
     private Empresa empresa;
    private Integer codigoOferta;
+   @ManagedProperty("#{loginBean}")
+   private LoginBean loginBean;
 
+    public LoginBean getLoginBean() {
+        return loginBean;
+    }
+
+    public void setLoginBean(LoginBean loginBean) {
+        this.loginBean = loginBean;
+    }
+
+    public List<Oferta> getListaAE() {
+        ListaAE = ofertaFacade.ListaAspi();
+        return ListaAE;
+    }
+
+    public void setListaAE(List<Oferta> ListaAE) {
+        this.ListaAE = ListaAE;
+    }
+   
     public List<Oferta> getListaofertaEmpresa() {
         //Prueba
-       String  CORREO_EMPRESA="cococorp@gmail.com";
-        ListaofertaEmpresa=ofertaFacade.ListaEmpresa(CORREO_EMPRESA);
+       String  CORREOEMPRESA="CORREP@GMAIL.COM";
+       String P;
+       P=loginBean.getCorreoUsuario();
+        ListaofertaEmpresa=ofertaFacade.ListaEmpresa(P);
+        System.out.println(""+CORREOEMPRESA);
         return ListaofertaEmpresa;
     }
+   
 
     public void setListaofertaEmpresa(List<Oferta> ListaofertaEmpresa) {
         this.ListaofertaEmpresa = ListaofertaEmpresa;
@@ -100,6 +130,9 @@ public class OfertaBean {
         empresa = new Empresa();
         
     }
+    public void cargarDatos(Aspirante me) {
+        this.aspirante = me;
+    }
     public void guardar1() {
         try {
             this.oferta.setNitEmpresa(empresa);
@@ -117,6 +150,33 @@ public class OfertaBean {
      public void limpiar() {
         this.oferta = new Oferta();
     }
+     public void cargarDatosO(Oferta me) {
+        this.oferta = me;
+    }
+     public void actualizar() {
+        try {
+            this.ofertaFacade.edit(oferta);
+            this.msj = "Registro Actualizado Correctamente";
+            this.oferta = new Oferta();
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.msj = "Error " + e.getMessage();
+        }
+        FacesMessage mensaje = new FacesMessage(this.msj);
+        FacesContext.getCurrentInstance().addMessage(null, mensaje);
+    }
+     public void eliminar(Oferta meli) {
+        try {
+            this.ofertaFacade.remove(meli);
+            this.msj = "Registro Eliminado Correctamente";
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.msj = "Error " + e.getMessage();
+        }
+        FacesMessage mensaje = new FacesMessage(this.msj);
+        FacesContext.getCurrentInstance().addMessage(null, mensaje);
+    }
+     
     
     public OfertaBean() {
     }

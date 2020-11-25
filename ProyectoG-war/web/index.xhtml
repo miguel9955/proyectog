@@ -4,27 +4,21 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <h:head>
-        <title></title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <title>Inicio</title>
+        <link href="../componentes/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="ICON" type="iMAGEN/PNG" href="../img/avatar.svg"/>
+
+        <link href="../css/estilos.css" rel="stylesheet"/>
     </h:head>
-    <h:body>
-       
-        <br />
-        <p:menubar>
-                <p:menuitem value="Inicio" outcome="index"/>
-                 <p:menuitem value="Login" outcome="Login"/>
-                <p:menuitem value="Aspirantes" outcome="/aspirante/indexA"/>
-                <p:menuitem value="Empresas" outcome="/empresa/indexE"/>
-        <p:menuitem  value="Registro Empresa" outcome="/CrearEmpresa"/>
+    <h:body id="page-top">
+
+        
 
 
-            </p:menubar>
-        <p:link outcome="/aspirante/indexA" value="Aspirantes"/>
-        <p:link outcome="/empresa/indexE" value="Empresa"/>
-
-       <p:dialog id="AspiranteCreateDlg" widgetVar="AspiranteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAspiranteTitle}">
-      <h:form id="AspiranteCreateForm" enctype="multipart/form-data">
+        <p:dialog id="AspiranteCreateDlg" widgetVar="AspiranteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAspiranteTitle}">
+            <h:form id="AspiranteCreateForm" enctype="multipart/form-data">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{aspiranteController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateAspiranteLabel_documentoAspirante}" for="documentoAspirante" />
@@ -53,80 +47,227 @@
                         <p:fileUpload
                             value="#{aspiranteController.file}" mode="simple"
                             />
-                   <p:outputLabel value="Contraseña:" for="contraseña" />
-                   <p:password id="contraseña" value="#{aspiranteController.contraseña}" title="Contraseña" required="true" requiredMessage="The Contraseña field is required."/>
-                  
+                        <p:outputLabel value="Contraseña:" for="contraseña" />
+                        <p:password id="contraseña" value="#{aspiranteController.contraseña}" title="Contraseña" required="true" requiredMessage="The Contraseña field is required."/>
+
                     </p:panelGrid>
-                    
-                <h:panelGrid columns="1">
-                   
-                    <p:commandButton value="Submit" action="#{aspiranteController.nuevoD()}" 
+
+                    <h:panelGrid columns="2">
+
+                        <p:commandButton value="Submit" action="#{aspiranteController.nuevoD()}" 
                                          ajax="false" update="display, :DocumentosListFomr:datalist, :growl"/>
-                                           
-                </h:panelGrid>                    <p:commandButton value="#{bundle.Cancel}" onclick="AspiranteCreateDialog.hide()"/>
+
+                        <p:commandButton value="#{bundle.Cancel}" onclick="AspiranteCreateDialog.hide()"/>
+
+                    </h:panelGrid>                   
                 </h:panelGroup>
             </h:form>
-               </p:dialog>
+        </p:dialog>
 
-             <p:commandButton id="createButton" icon="ui-icon-plus"   value="Resgistrar Aspirante" actionListener="#{aspiranteController.prepareCreate}" update=":AspiranteCreateForm" oncomplete="PF('AspiranteCreateDialog').show()"/>
-             <f:view>
+        <f:view>
 
 
-                 <h:form>
-                     <h1><h:outputText value="List"/></h1>
-                     <p:dataTable value="#{ofertaBean.listaoferta}" var="item">
-                         <p:column>
-                             <f:facet name="header">
-                                 <h:outputText value="CodigoOferta"/>
-                             </f:facet>
-                             <h:outputText value="#{item.codigoOferta}"/>
-                         </p:column>
-                         <p:column>
-                             <f:facet name="header">
-                                 <h:outputText value="TipoOferta"/>
-                             </f:facet>
-                             <h:outputText value="#{item.tipoOferta}"/>
-                         </p:column>
-                         <p:column>
-                             <f:facet name="header">
-                                 <h:outputText value="DescricionOferta"/>
-                             </f:facet>
-                             <h:outputText value="#{item.descricionOferta}"/>
-                         </p:column>
-                         <p:column>
-                             <f:facet name="header">
-                                 <h:outputText value="ExperienciaOferta"/>
-                             </f:facet>
-                             <h:outputText value="#{item.experienciaOferta}"/>
-                         </p:column>
-                         <p:column>
-                             <f:facet name="header">
-                                 <h:outputText value="CantidadAspirantesOferta"/>
-                             </f:facet>
-                             <h:outputText value="#{item.cantidadAspirantesOferta}"/>
-                         </p:column>
-                         <p:column>
-                             <f:facet name="header">
-                                 <h:outputText value="TituloRequerido"/>
-                             </f:facet>
-                             <h:outputText value="#{item.tituloRequerido}"/>
-                         </p:column>
-                         <p:column>
-                             <f:facet name="header">
-                                 <h:outputText value="EstadoOferta"/>
-                             </f:facet>
-                             <h:outputText value="#{item.estadoOferta}"/>
-                         </p:column>
-                         <p:column>
-                             <f:facet name="header">
-                                 <h:outputText value="NitEmpresa"/>
-                             </f:facet>
-                             <h:outputText value="#{item.nitEmpresa.nombreEmpresa}"/>
-                         </p:column>
-                     </p:dataTable>
-                 </h:form>
-             </f:view>
 
+        </f:view>
+        <div id="wrapper">
+
+            <!-- menu lateral-->
+            <ul class="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+                <!-- icono y titulo menu -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <i class="fa fa-user-circle" aria-hidden="true"></i>
+                    </div>
+                    <div class="sidebar-brand-text mx-3">Inicio</div>
+                </a>
+
+                <!-- Divisor -->
+                <hr class="sidebar-divider my-0"/>
+
+                <!-- subtitulo menu-->
+                <li class="nav-item active">
+                    <a class="nav-link"  href="#">
+                        <i class="fa fa-address-card" aria-hidden="true"></i>
+                        <span>Inicio</span></a>
+                </li>
+
+                <!-- Divisor-->
+                <hr class="sidebar-divider"/>
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Acciones
+                </div>
+
+                <!-- desplegable de menu-->
+                <li class="nav-item">
+
+
+                </li>
+                <!-- Divisor-->
+                <hr class="sidebar-divider d-none d-md-block"/>
+
+                <!-- boton despliegue menu -->
+                <div class="text-center d-none d-md-inline">
+                    <p:commandButton  class="dropdown-item" id="createButton" icon="ui-icon-plus"   value="Resgistrar Aspirante" actionListener="#{aspiranteController.prepareCreate}" update=":AspiranteCreateForm" oncomplete="PF('AspiranteCreateDialog').show()"/>
+                </div>
+                <br></br>
+
+                <div class="text-center d-none d-md-inline">
+                    <p:button class="dropdown-item" outcome="/Login" value="Login">
+
+                    </p:button>
+                </div>
+                <br></br>
+                <div class="text-center d-none d-md-inline">
+                    <p:button class="dropdown-item" icon="ui-icon-plus" outcome="/CrearEmpresa" value="Registro Empresa" >
+
+                    </p:button>
+                </div>
+            </ul>
+            <!--fin del menu lateral-->
+            <!-- Contenedor principal -->
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <!-- contenedor secundario -->
+                <div id="content">
+
+                    <!-- barra superior -->
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                        <!-- Sidebar Toggle (Topbar) -->
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <img src="../img/uts.png" width="80" height="70" class="imagen-menu"/>
+                        <h2 class="h2-menu">Unidades Tecnologicas de Santander</h2>
+
+
+                        <!-- cuadro usuario -->
+                        <ul class="navbar-nav ml-auto">
+
+                            <!-- divisor -->
+                            <div class="topbar-divider d-none d-sm-block"></div>
+                            <!-- fin divisor -->
+
+                            <!-- usuario informacion -->
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Usuario</span>
+                                    <img class="img-profile rounded-circle" src="../img/avatar-aspirante.svg"/>
+                                </a>
+                                <!-- desplegable usuario -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        Cerrar Sesion
+                                    </a>
+                                </div>
+                                <!-- fin desplegable usuario -->
+                            </li>
+                            <!-- fin usuario informacion -->
+                        </ul>
+                        <!-- fin cuadro usuario -->
+                    </nav>
+                    <!-- fin barra superior -->
+                    <!-- Contenedor interno-->
+                    <div class="container-fluid">
+
+                        <!-- Page Heading -->
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">OFertas Activas!!</h1>
+
+                        </div>
+
+                        <!-- fin seccion cuadros -->
+                        <!-- tabla -->
+                        <div class="card mb-4">
+                            <div class="card-header"><i class="fas fa-table mr-1"></i>Tabla de ofertas</div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <h:form>
+                                        <h1><h:outputText value="Lista Ofertas"/></h1>
+                                        <p:dataTable value="#{ofertaBean.listaoferta}" var="item">
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="CodigoOferta"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.codigoOferta}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="TipoOferta"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.tipoOferta}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="DescricionOferta"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.descricionOferta}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="ExperienciaOferta"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.experienciaOferta}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="CantidadAspirantesOferta"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.cantidadAspirantesOferta}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="TituloRequerido"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.tituloRequerido}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="EstadoOferta"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.estadoOferta}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="NitEmpresa"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.nitEmpresa.nombreEmpresa}"/>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </h:form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- fin tabla -->
+
+                    </div>
+                    <!-- /.contenedor interno -->
+
+                </div>
+                <!-- fin Contenedor secundario -->
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white ">
+                    <div class="container my-auto ">
+                        <div class="copyright text-center my-auto ">
+                            <span>Copyright &copy; Miguel Leonardo Cordoba-- Johan Arley Ortiz---2020</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- fin Footer -->
+
+            </div>
+            <!-- fin contenedor principal -->
+
+        </div>
+        <!-- fin  Wrapper -->
+        <!--componentes necesarios-->
+        <script src="../componentes/bootstrap/js/bootstrap.bundle.min.js "></script>
+        <script src="../js/desplegar.js"></script>
+        <!-- fin de componentes -->
     </h:body>
 
 </html>

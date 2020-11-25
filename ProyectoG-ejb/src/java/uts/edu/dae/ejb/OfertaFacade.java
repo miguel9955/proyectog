@@ -25,9 +25,21 @@ public class OfertaFacade extends AbstractFacade<Oferta> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    public List ListaEmpresa(String CORREO_EMPRESA){
-        System.out.println(""+CORREO_EMPRESA);
-    Query query =em.createQuery("SELECT O FROM Oferta O WHERE O.nitEmpresa =(SELECT E.nitEmpresa FROM Empresa E WHERE E.correoEmpresa='cococorp@gmail.com')");
+    public List ListaEmpresa( String a){
+        
+        Query query =em.createQuery("SELECT O FROM Oferta O WHERE O.nitEmpresa ="
+                + " (SELECT E.nitEmpresa FROM Empresa E WHERE E.correoEmpresa=:a)").setParameter("a", a);
+        if (query.getResultList().size()>0) {
+            List orden = query.getResultList();
+            return orden;
+        }
+        return null;
+        }
+    public List ListaAspi(){
+        
+        Query query =em.createQuery("SELECT A.codigoOferta,E.nombresApitante,"
+                + "E.apellidosAspirante,E.hojadevidaAspirante"
+                + " FROM AspiranteOfertaAplicar A, Aspirante E"  ) ;
         if (query.getResultList().size()>0) {
             List orden = query.getResultList();
             return orden;
